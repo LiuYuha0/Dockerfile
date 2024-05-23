@@ -32,8 +32,9 @@ RUN   git clone https://github.com/opencv/opencv.git && \
       cd opencv && \
       git checkout ${OPENCV_VERSION} && \
       git clone https://github.com/opencv/opencv_contrib.git && \
+      cd opencv_contrib && \
       git checkout ${OPENCV_CONTRIB_VERSION} && \
-      mkdir build && cd build && \
+      cd .. && mkdir build && cd build && \
       cmake -DCMAKE_BUILD_TYPE=Release -DGLIBCXX_USE_CXX11_ABI=0 -DCMAKE_INSTALL_PREFIX=/usr/local  -DOPENCV_EXTRA_MODULES_PATH=../opencv_contrib/modules .. && \
       make install && \
       rm -rf ../../opencv
