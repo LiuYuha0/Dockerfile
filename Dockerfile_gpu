@@ -16,8 +16,9 @@ ENV CERES_VERSION="1.14.0"
 
 # install ros1 noetic
 RUN /bin/bash -c "echo 'deb http://packages.ros.org/ros/ubuntu focal main' > /etc/apt/sources.list.d/ros-latest.list" && \
-    apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 && \
-    apt update && apt install -y ros-noetic-desktop-full
+    curl -sSL 'http://packages.ros.org/ros.key' | apt-key add - && \
+    apt update && \
+    apt install -y ros-noetic-desktop-full
 
 RUN apt update && apt install -y python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential && \
     apt install -y python3-rosdep && rosdep init && rosdep update
