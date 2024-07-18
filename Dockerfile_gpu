@@ -1,6 +1,6 @@
 # GPU docker.
 
-FROM ubuntu20.04
+FROM ros:noetic-robot
 
 LABEL maintainer="liuyuhao@hust.edu.cn"
 
