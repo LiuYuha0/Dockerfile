@@ -17,7 +17,18 @@ RUN apt update && apt install -y \
     cmake \
     build-essential \
     pkg-config \
-    git 
+    git \
+    lsb-release \
+    gnupg2 \
+    curl
+
+RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros1-latest.list'
+
+RUN curl -sSL 'http://packages.ros.org/ros.key' | apt-key add -
+
+RUN apt-get update && apt-get install -y \
+    ros-noetic-desktop-full \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN cd /tmp && git clone https://github.com/google/glog.git && cd glog && git checkout v0.6.0 && \
     mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON .. && make -j && make install && \
