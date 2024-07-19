@@ -18,10 +18,3 @@ source /opt/ros/noetic/setup.bash
 catkin_make
 chmod a+rw -R /midea_robot/ros1_ws
 
-cd /midea_robot/ros2_ws
-if [[ ! -d src ]]; then
-    mkdir src
-fi
-source /opt/ros/humble/setup.bash
-colcon build
-chmod a+rw -R /midea_robot/ros2_ws
