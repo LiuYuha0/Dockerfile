@@ -4,6 +4,8 @@ FROM ros:noetic-robot
 
 LABEL maintainer="liuyuhao@hust.edu.cn"
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 # tools
 RUN apt update && apt install -y terminator eog vim
 
