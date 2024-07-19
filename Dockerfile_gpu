@@ -12,9 +12,6 @@ ENV NVIDIA_DRIVER_CAPABILITIES \
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN /bin/bash -c '. /etc/lsb-release && echo "deb http://mirrors.tuna.tsinghua.edu.cn/ros/ubuntu/ `lsb_release -cs` main" > /etc/apt/sources.list.d/ros-latest.list' \
-    apt install curl \
-    apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 \
-    apt update && \
-    apt install -y ros-noetic-desktop-full
-
+RUN cd /tmp && git clone https://github.com/google/glog.git && cd glog && git checkout v0.7.1 && \
+    mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON .. && make -j && make install && \
+    cd /tmp && rm -rf glog
