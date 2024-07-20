@@ -68,9 +68,8 @@ RUN apt update && apt install python3-catkin-tools python3-osrf-pycommon
 # oh-my-bash
 RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 
-COPY ./setup_ros1_bridge.sh /midea_robot/
 COPY ./init_ws.sh /midea_robot/
-RUN chmod +x /midea_robot/setup_ros1_bridge.sh /midea_robot/init_ws.sh
+RUN chmod +x /midea_robot/init_ws.sh
 
 RUN apt update && apt install -y \
     google-mock \
@@ -126,7 +125,7 @@ RUN apt update && apt install -y libpcl-dev ros-noetic-pcl-conversions
 
 # GTSAM
 RUN cd /tmp && \
-    git clone https://github.com/borglab/gtsam && cd gtsam && git checkout 4.2a5 && \
+    git clone https://github.com/borglab/gtsam && cd gtsam && git checkout 4.2.0 && \
     mkdir build &&  cd build && \
     cmake -DCMAKE_BUILD_TYPE=Release -DGTSAM_BUILD_WITH_MARCH_NATIVE=OFF -DCMAKE_INSTALL_PREFIX=/usr/local .. && \
     make install -j8
