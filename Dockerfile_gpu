@@ -56,14 +56,13 @@ RUN apt update && apt install -y \
 RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros1-latest.list'
 RUN curl -sSL 'http://packages.ros.org/ros.key' | apt-key add -
 RUN apt-get update && apt-get install -y \
-    ros-noetic-desktop-full \
-    && rm -rf /var/lib/apt/lists/*
+    ros-noetic-desktop-full
 
-RUN apt update && apt install -y python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential && \
+RUN apt update && apt install -y python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool && \
     apt install -y python3-rosdep && rosdep init && rosdep update
 
 # catkin tools
-RUN apt update && apt install python3-catkin-tools python3-osrf-pycommon
+RUN apt update && apt install -y python3-catkin-tools python3-osrf-pycommon
 
 # oh-my-bash
 RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
