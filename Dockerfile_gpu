@@ -53,27 +53,9 @@ RUN apt update && apt install -y \
     libvtk6-dev \
     libvtk6-qt-dev
 
-# install ros1 noetic
-RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros1-latest.list'
-RUN curl -sSL 'http://packages.ros.org/ros.key' | apt-key add -
-RUN apt-get update && apt-get install -y \
-    ros-noetic-desktop-full
-
-RUN apt update && apt install -y python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool && \
-    apt install -y python3-rosdep && rosdep init && rosdep update
-
-# catkin tools
-RUN apt update && apt install -y python3-catkin-tools python3-osrf-pycommon
-
-# oh-my-bash
-RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
-
-COPY ./init_ws.sh /midea_robot/
-RUN chmod +x /midea_robot/init_ws.sh
 
 RUN apt update && apt install -y \
     google-mock \
-    libceres-dev \
     liblua5.3-dev \
     libboost-dev \
     libboost-iostreams-dev \
@@ -88,44 +70,6 @@ RUN apt update && apt install -y wget curl nano htop bash-completion
 # install pandas
 RUN ln -s /usr/bin/python3 /usr/bin/python && pip3 install pandas
 
-# gflags & glog
-RUN cd /tmp && git clone https://github.com/gflags/gflags.git && cd gflags && git checkout v2.2.2 && \
-    mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON .. && make -j && \
-    make install && cd /tmp /rm -rf gflags
-
-RUN cd /tmp && git clone https://github.com/google/glog.git && cd glog && git checkout v0.6.0 && \
-    mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON .. && make -j && make install && \
-    cd /tmp && rm -rf glog
-
 # gdb
 RUN apt update && apt install -y gdb
 
-# Pangolin
-RUN cd /tmp && \
-    git clone https://github.com/stevenlovegrove/Pangolin.git && \
-    cd Pangolin && \
-    mkdir build && \
-    cd build && \
-    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local .. && \
-    cmake -j 8 --build . && \
-    make install && \
-    cd /tmp && rm -rf Pangolin
-
-# Evo
-RUN cd /tmp && \
-    git clone https://github.com/MichaelGrupp/evo.git && \
-    cd evo && \
-    apt update && \
-    apt install python3-pip -y && \
-    pip3 install evo --upgrade && \
-    cd /tmp && rm -rf evo
-
-# PCL
-RUN apt update && apt install -y libpcl-dev ros-noetic-pcl-conversions
-
-# GTSAM
-# RUN cd /tmp && \
-#     git clone https://github.com/borglab/gtsam && cd gtsam && git checkout 4.2.0 && \
-#     mkdir build &&  cd build && \
-#     cmake -DCMAKE_BUILD_TYPE=Release -DGTSAM_BUILD_WITH_MARCH_NATIVE=OFF -DCMAKE_INSTALL_PREFIX=/usr/local .. && \
-#     make install -j8
