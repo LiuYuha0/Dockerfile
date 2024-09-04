@@ -1,6 +1,6 @@
 # GPU docker.
 
-FROM nvidia/cuda:12.6.0-devel-ubuntu24.04
+FROM nvidia/cuda:12.6.0-devel-ubuntu20.04
 
 LABEL maintainer="liuyuhao@hust.edu.cn"
 
