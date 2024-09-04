@@ -68,6 +68,14 @@ RUN apt update && apt install -y python3-catkin-tools python3-osrf-pycommon
 # tools
 RUN apt update && apt install -y terminator eog vim
 
+# some ROS packages
+RUN apt update && apt install -y \
+    ros-noetic-robot-navigation \
+    ros-noetic-rospy-message-converter \
+    ros-noetic-amcl \
+    ros-noetic-move-base \
+    ros-noetic-hector-mapping
+
 # oh-my-bash
 RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 
@@ -86,10 +94,24 @@ RUN apt update && apt install -y \
     libpcl-dev \
     python3-sphinx
 
+RUN apt update && apt install -y ros-noetic-teb-local-planner ros-noetic-dwa-local-planner
+
 RUN apt update && apt install -y wget curl nano htop bash-completion
+
+# joystick support
+RUN apt update && apt install -y ros-noetic-joy ros-noetic-teleop-twist-joy
+
+# rtabmap
+RUN apt update && apt install -y ros-noetic-rtabmap ros-noetic-rtabmap-ros && \
+    apt remove -y ros-noetic-rtabmap-ros
+
+
 
 # install pandas
 RUN ln -s /usr/bin/python3 /usr/bin/python && pip3 install pandas
+
+# mako
+RUN python3 -m pip install mako
 
 # gflags & glog
 RUN cd /tmp && git clone https://github.com/gflags/gflags.git && cd gflags && git checkout v2.2.2 && \
@@ -102,6 +124,18 @@ RUN cd /tmp && git clone https://github.com/google/glog.git && cd glog && git ch
 
 # gdb
 RUN apt update && apt install -y gdb
+
+# add waypoint action
+RUN pip3 install transforms3d
+
+# ros2 tf_monitor
+RUN apt update && pip3 install transformations
+
+# install and config xvfb to support camera sensor's work.
+RUN apt update && apt install -y xvfb
+
+# hector traj server
+RUN apt update && apt install -y ros-noetic-hector-trajectory-server
 
 # Pangolin
 RUN cd /tmp && \
@@ -132,3 +166,9 @@ RUN apt update && apt install -y libpcl-dev ros-noetic-pcl-conversions
 #     mkdir build &&  cd build && \
 #     cmake -DCMAKE_BUILD_TYPE=Release -DGTSAM_BUILD_WITH_MARCH_NATIVE=OFF -DCMAKE_INSTALL_PREFIX=/usr/local .. && \
 #     make install -j8
+
+RUN apt update && apt install -y ros-noetic-nmea-msgs
+
+RUN apt update && apt install -y libomp-dev gedit evince
+
+RUN apt update && apt install -y pybind11-dev
