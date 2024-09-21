@@ -1,6 +1,6 @@
 # GPU docker.
 
-FROM nvidia/cuda:12.4.0-devel-ubuntu20.04
+FROM nvidia/cuda:12.4.1-devel-ubuntu20.04
 
 LABEL maintainer="liuyuhao@hust.edu.cn"
 
@@ -94,18 +94,8 @@ RUN apt update && apt install -y \
     libpcl-dev \
     python3-sphinx
 
-RUN apt update && apt install -y ros-noetic-teb-local-planner ros-noetic-dwa-local-planner
 
 RUN apt update && apt install -y wget curl nano htop bash-completion
-
-# joystick support
-RUN apt update && apt install -y ros-noetic-joy ros-noetic-teleop-twist-joy
-
-# rtabmap
-RUN apt update && apt install -y ros-noetic-rtabmap ros-noetic-rtabmap-ros && \
-    apt remove -y ros-noetic-rtabmap-ros
-
-
 
 # install pandas
 RUN ln -s /usr/bin/python3 /usr/bin/python && pip3 install pandas
@@ -124,9 +114,6 @@ RUN apt update && pip3 install transformations
 
 # install and config xvfb to support camera sensor's work.
 RUN apt update && apt install -y xvfb
-
-# hector traj server
-RUN apt update && apt install -y ros-noetic-hector-trajectory-server
 
 # Pangolin
 RUN cd /tmp && \

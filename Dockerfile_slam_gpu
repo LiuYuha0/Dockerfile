@@ -4,6 +4,18 @@ FROM registry.cn-hangzhou.aliyuncs.com/robot_slam_docker/slam:slam_gpu_base
 
 LABEL maintainer="liuyuhao@hust.edu.cn"
 
+RUN apt update && apt install -y ros-noetic-teb-local-planner ros-noetic-dwa-local-planner
+
+# joystick support
+RUN apt update && apt install -y ros-noetic-joy ros-noetic-teleop-twist-joy
+
+# rtabmap
+RUN apt update && apt install -y ros-noetic-rtabmap ros-noetic-rtabmap-ros && \
+    apt remove -y ros-noetic-rtabmap-ros
+
+# hector traj server
+RUN apt update && apt install -y ros-noetic-hector-trajectory-server
+
 # GTSAM
 RUN cd /tmp && \
     git clone https://github.com/borglab/gtsam && cd gtsam && git checkout 4.2.0 && \
