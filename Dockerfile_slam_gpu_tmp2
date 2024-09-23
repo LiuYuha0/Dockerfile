@@ -1,0 +1,13 @@
+# GPU docker.
+
+FROM registry.cn-hangzhou.aliyuncs.com/robot_slam_docker/slam:slam_gpu_tmp1
+
+LABEL maintainer="liuyuhao@hust.edu.cn"
+
+# GTSAM
+RUN cd /tmp && \
+    git clone https://github.com/borglab/gtsam && cd gtsam && git checkout 4.2.0 && \
+    mkdir build &&  cd build && \
+    cmake -DCMAKE_BUILD_TYPE=Release -DGTSAM_BUILD_WITH_MARCH_NATIVE=OFF -DCMAKE_INSTALL_PREFIX=/usr/local .. && \
+    make install
+
