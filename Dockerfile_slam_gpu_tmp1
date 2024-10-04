@@ -15,3 +15,11 @@ RUN apt update && apt install -y ros-noetic-rtabmap ros-noetic-rtabmap-ros && \
 
 # hector traj server
 RUN apt update && apt install -y ros-noetic-hector-trajectory-server
+
+# mapviz
+RUN apt update && apt-get install -y \ 
+    ros-noetic-mapviz \
+    ros-noetic-mapviz-plugins \
+    ros-noetic-tile-map \
+    ros-noetic-multires-image
+
