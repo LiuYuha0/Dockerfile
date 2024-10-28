@@ -120,6 +120,7 @@ RUN apt update && apt install -y xvfb
 RUN cd /tmp && \
     git clone https://github.com/stevenlovegrove/Pangolin.git && \
     cd Pangolin && \
+    git checkout v0.6 && \
     mkdir build && \
     cd build && \
     cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local .. && \
