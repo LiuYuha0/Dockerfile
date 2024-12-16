@@ -1,0 +1,8 @@
+# GPU docker.
+
+FROM osrf/ros:melodic-desktop-full
+
+LABEL maintainer="liuyuhao@hust.edu.cn"
+
+ENV DEBIAN_FRONTEND=noninteractive
+
