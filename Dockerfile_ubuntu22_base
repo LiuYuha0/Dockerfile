@@ -38,4 +38,9 @@ RUN apt update && apt install -y \
     libwayland-dev \
     libxkbcommon-dev \
     wayland-protocols \
-    libeigen3-dev
+    libeigen3-dev \
+    libgflags-dev \
+    libsuitesparse-dev
+
+# oh-my-bash
+RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
