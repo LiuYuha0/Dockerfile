@@ -1,0 +1,6 @@
+FROM registry.cn-hangzhou.aliyuncs.com/robot_slam_docker/slam:slam_macvo0
+
+
+RUN sudo pip3 install --no-cache-dir torchvision jaxtyping typeguard==2.13.3
+
+CMD /bin/bash
