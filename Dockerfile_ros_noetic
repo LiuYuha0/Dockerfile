@@ -25,9 +25,6 @@ RUN apt update && apt install -y \
     libv4l-dev \
     libxvidcore-dev \
     libx264-dev \
-    libjpeg-dev \
-    libpng-dev \
-    libtiff-dev \
     gfortran \
     openexr \
     libatlas-base-dev \
@@ -38,22 +35,15 @@ RUN apt update && apt install -y \
     libtbb-dev \
     libdc1394-22-dev \
     libgl1-mesa-dev \
-    libglew-dev \
-    libegl1-mesa-dev \
     libwayland-dev \
     libxkbcommon-dev \
-    wayland-protocols \
     libeigen3-dev \
     libvtk6-dev \
     libvtk6-qt-dev
 
-RUN apt update && apt install -y python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool && \
-    apt install -y python3-rosdep && rosdep init && rosdep update
-    
 RUN apt update && apt install -y \
     google-mock \
     libceres-dev \
-    liblua5.3-dev \
     libboost-dev \
     libboost-iostreams-dev \
     libcairo2-dev \
